@@ -1,0 +1,36 @@
+# kubernetes deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-rest-hello-world
+  labels:
+    app: spring-boot-rest-hello-world
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: spring-boot-rest-hello-world
+  template:
+    metadata:
+      labels:
+        app: spring-boot-rest-hello-world
+    spec:
+      containers:
+        - name: spring-boot-rest-hello-world
+          image: your-docker-repo/spring-boot-rest-hello-world:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-rest-hello-world
+spec:
+  selector:
+    app: spring-boot-rest-hello-world
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
