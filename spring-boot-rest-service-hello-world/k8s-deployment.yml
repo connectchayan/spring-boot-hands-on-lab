@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-rest-hello-world
-          image: your-docker-repo/spring-boot-rest-hello-world:latest
+          image: chayanjavaarch/spring-boot-hands-on-lab:spring-boot-rest-hello-world
           ports:
             - containerPort: 8080
 ---

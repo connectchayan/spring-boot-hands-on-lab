@@ -14,4 +14,4 @@ spec:
               service:
                 name: spring-boot-rest-hello-world
                 port:
-                  number: 80
+                  number: 8080
