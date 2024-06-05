@@ -30,7 +30,8 @@ spec:
   selector:
     app: spring-boot-rest-hello-world
   ports:
-    - protocol: TCP
+    - name: http
       port: 8080
+      protocol: TCP
       targetPort: 8080
   type: LoadBalancer
