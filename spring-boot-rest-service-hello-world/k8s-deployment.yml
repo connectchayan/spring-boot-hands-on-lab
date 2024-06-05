@@ -7,7 +7,7 @@ metadata:
   labels:
     app: spring-boot-rest-hello-world
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: spring-boot-rest-hello-world
