@@ -6,9 +6,6 @@ metadata:
 spec:
   podSelector:
     matchLabels: {}  
-  policyTypes:
-  - Ingress
-  - Egress  
   ingress:
   - from:
     - ipBlock:
@@ -16,10 +13,3 @@ spec:
     ports:
     - protocol: TCP
       port: 8080
-  egress:
-  - to:
-    - ipBlock:
-        cidr: 0.0.0.0/0  
-    ports:
-    - protocol: TCP
-      port: -1
