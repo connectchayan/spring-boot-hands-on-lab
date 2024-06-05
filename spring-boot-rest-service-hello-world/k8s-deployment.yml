@@ -27,11 +27,12 @@ kind: Service
 metadata:
   name: spring-boot-rest-hello-world
 spec:
+  type: LoadBalancer
   selector:
     app: spring-boot-rest-hello-world
   ports:
     - name: http
-      port: 8080
+      port: 80
       protocol: TCP
       targetPort: 8080
   type: LoadBalancer
