@@ -5,7 +5,8 @@ metadata:
   namespace: default
 spec:
   podSelector:
-    matchLabels: {}  
+    matchLabels:
+      app: spring-boot-rest-hello-world
   ingress:
   - from:
     - ipBlock:
