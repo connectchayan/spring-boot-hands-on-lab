@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-boot-rest-jpa
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/orderDatabase
+    username: root
+    password: KR@kenGoth12
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: MYSQL
