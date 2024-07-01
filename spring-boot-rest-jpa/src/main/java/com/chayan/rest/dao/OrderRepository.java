@@ -7,8 +7,8 @@ import com.chayan.rest.entity.Order;
 
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long>{
-	
-	
+public interface OrderRepository extends JpaRepository<Order, Long> {
+
+
 
 }

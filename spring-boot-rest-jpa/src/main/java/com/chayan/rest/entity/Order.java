@@ -26,20 +26,20 @@ import lombok.NoArgsConstructor;
 @Table(name = "ORDER_DETAILS")
 public class Order {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "order_id")
-	private Long orderId;
-	private String description;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "order_id")
+  private Long orderId;
+  private String description;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_order_id" , referencedColumnName = "order_id")
-	
-	private List<Item> item;
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_order_id", referencedColumnName = "order_id")
+  private List<Item> item;
 
-	@JsonManagedReference
-	public List<Item> getItem() {
-		return item;
-	}
+
+  @JsonManagedReference
+  public List<Item> getItem() {
+    return item;
+  }
 
 }

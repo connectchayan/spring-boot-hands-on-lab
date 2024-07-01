@@ -19,36 +19,34 @@ import com.chayan.rest.service.OrderService;
 @RestController
 @RequestMapping("/api/v1/order-service")
 public class OrderController {
-	
-	@Autowired
-	private OrderService orderService;
-	
-	@GetMapping("/orders/{id}")
-	public ResponseEntity<Order> getOrder(@PathVariable Long id) {
 
-		return orderService.getOrder(id)
-				.map(ordr -> ResponseEntity.ok(ordr))
-				.orElse(ResponseEntity.noContent().build());
+  @Autowired
+  private OrderService orderService;
 
-	}
-	
-	@PostMapping("/order")
-	public ResponseEntity<Order> createOrder(@RequestBody Order order) {
+  @GetMapping("/orders/{id}")
+  public ResponseEntity<Order> getOrder(@PathVariable Long id) {
 
-		return Optional.ofNullable(orderService.createOrder(order))
-				.map(ordr -> ResponseEntity.ok(ordr))
-				.orElse(ResponseEntity.badRequest().build());
+    return orderService.getOrder(id).map(ordr -> ResponseEntity.ok(ordr))
+        .orElse(ResponseEntity.noContent().build());
 
-	}
-	
-	@PatchMapping("/orders/{id}")
-	public ResponseEntity<Order> updateOrder(@RequestBody Order order,@PathVariable Long id) throws Exception {
+  }
 
-		return Optional.ofNullable(orderService.updateOrder(order,id))
-				.map(ordr -> ResponseEntity.ok(ordr))
-				.orElse(ResponseEntity.badRequest().build());
+  @PostMapping("/order")
+  public ResponseEntity<Order> createOrder(@RequestBody Order order) {
 
-	}
-	
+    return Optional.ofNullable(orderService.createOrder(order)).map(ordr -> ResponseEntity.ok(ordr))
+        .orElse(ResponseEntity.badRequest().build());
+
+  }
+
+  @PatchMapping("/orders/{id}")
+  public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable Long id)
+      throws Exception {
+
+    return Optional.ofNullable(orderService.updateOrder(order, id))
+        .map(ordr -> ResponseEntity.ok(ordr)).orElse(ResponseEntity.badRequest().build());
+
+  }
+
 
 }

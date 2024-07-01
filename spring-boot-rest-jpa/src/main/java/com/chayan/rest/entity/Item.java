@@ -23,20 +23,20 @@ import lombok.NoArgsConstructor;
 @Table(name = "ORDER_ITEM")
 public class Item {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "item_id")
-	private Long itemId;
-	private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "item_id")
+  private Long itemId;
+  private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Unidirectional or bidirectional relationship based
-																	// on need
-	@JoinColumn(name = "fk_order_id")
-	private Order order;
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Unidirectional or bidirectional
+                                                                // relationship based
+  @JoinColumn(name = "fk_order_id")
+  private Order order;
 
-	@JsonBackReference
-	public Order getOrder() {
-		return order;
-	}
+  @JsonBackReference
+  public Order getOrder() {
+    return order;
+  }
 
 }
