@@ -1,4 +1,4 @@
-package com.chayan.rest.entity;
+package com.chayan.rest.enums;
 
 public enum DeliveryMethod {
 
