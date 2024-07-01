@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +36,9 @@ public class Order {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_order_id", referencedColumnName = "order_id")
   private List<Item> item;
-
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "delivery_id")
+  private Delivery delivery;
 
   @JsonManagedReference
   public List<Item> getItem() {

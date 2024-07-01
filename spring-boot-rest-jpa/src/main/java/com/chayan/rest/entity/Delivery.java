@@ -26,11 +26,14 @@ public class Delivery {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "delivery_id")
   private Long deliveryID;
-  @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+  
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "delivery")
   private Order order;
   private String deliveryAddress;
+  
   @Enumerated(EnumType.STRING)
   private DeliveryMethod deliveryMethod;
+  
   private String estimatedDeliveryDate;
 
 
