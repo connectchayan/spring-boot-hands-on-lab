@@ -42,9 +42,9 @@ public class OrderService {
       if (Objects.nonNull(order.getItem())) {
         ordr.setItem(order.getItem());
       }
-      
+
       if (Objects.nonNull(order.getDelivery())) {
-      ordr.setDelivery(order.getDelivery());
+        ordr.setDelivery(order.getDelivery());
       }
       return orderRepository.save(ordr);
     } else {
