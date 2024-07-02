@@ -15,3 +15,6 @@ spring:
     hibernate:
       ddl-auto: update
     database: MYSQL
+  jackson:
+    serialization:
+     fail-on-empty-beans: false

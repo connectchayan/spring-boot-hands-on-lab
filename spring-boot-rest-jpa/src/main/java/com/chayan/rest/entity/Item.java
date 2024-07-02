@@ -29,8 +29,7 @@ public class Item {
   private Long itemId;
   private String name;
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Unidirectional or bidirectional
-                                                                // relationship based
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Owning side
   @JoinColumn(name = "fk_order_id")
   private Order order;
 

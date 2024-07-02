@@ -34,17 +34,16 @@ public class OrderController {
   @PostMapping("/order")
   public ResponseEntity<Order> createOrder(@RequestBody Order order) {
 
-    return Optional.ofNullable(orderService.createOrder(order)).map(ordr -> ResponseEntity.ok(ordr))
+    return Optional.ofNullable(orderService.createOrder(order)).map(ResponseEntity::ok)
         .orElse(ResponseEntity.badRequest().build());
 
   }
 
   @PatchMapping("/orders/{id}")
-  public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable Long id)
-      throws Exception {
+  public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable Long id) {
 
-    return Optional.ofNullable(orderService.updateOrder(order, id))
-        .map(ordr -> ResponseEntity.ok(ordr)).orElse(ResponseEntity.badRequest().build());
+    return Optional.ofNullable(orderService.updateOrder(order, id)).map(ResponseEntity::ok)
+        .orElse(ResponseEntity.badRequest().build());
 
   }
 

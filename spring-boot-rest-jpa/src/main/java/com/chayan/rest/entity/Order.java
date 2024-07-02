@@ -1,10 +1,8 @@
 package com.chayan.rest.entity;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,13 +34,22 @@ public class Order {
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_order_id", referencedColumnName = "order_id")
   private List<Item> item;
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "delivery_id")
+
+  @OneToOne(mappedBy = "order",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+  @JoinColumn(name = "fk_order_id", referencedColumnName = "order_id")
+  @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
   private Delivery delivery;
 
   @JsonManagedReference
   public List<Item> getItem() {
     return item;
   }
+
+  @JsonManagedReference
+  public Delivery getDelivery() {
+    return delivery;
+  }
+
+
 
 }

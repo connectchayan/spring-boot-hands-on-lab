@@ -1,5 +1,6 @@
 package com.chayan.rest.service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,13 @@ public class OrderService {
 
       ordr.setDescription(order.getDescription());
 
-      ordr.setItem(order.getItem());
-
+      if (Objects.nonNull(order.getItem())) {
+        ordr.setItem(order.getItem());
+      }
+      
+      if (Objects.nonNull(order.getDelivery())) {
+      ordr.setDelivery(order.getDelivery());
+      }
       return orderRepository.save(ordr);
     } else {
       throw new ResourceNotFoundException("Order not found with id: " + id);
