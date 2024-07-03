@@ -32,11 +32,11 @@ public class Order {
   private String description;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_order_id", referencedColumnName = "order_id")
+  @JoinColumn(name = "order_id")
   private List<Item> item;
 
-  @OneToOne(mappedBy = "order",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
-  @JoinColumn(name = "fk_order_id", referencedColumnName = "order_id")
+  @OneToOne(mappedBy = "order",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "order_id")
   @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
   private Delivery delivery;
 

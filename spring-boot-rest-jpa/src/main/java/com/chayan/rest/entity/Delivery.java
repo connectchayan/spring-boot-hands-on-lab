@@ -30,8 +30,9 @@ public class Delivery {
   @Column(name = "delivery_id")
   private Long deliveryID;
   
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_order_id")
+  @OneToOne
+  //@JoinColumn(name = "fk_order_id")
+  @JoinColumn(name = "order_id")
   private Order order;
   
   private String deliveryAddress;

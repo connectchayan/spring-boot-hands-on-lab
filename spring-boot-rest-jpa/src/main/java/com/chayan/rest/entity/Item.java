@@ -1,7 +1,6 @@
 package com.chayan.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,13 +12,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "ORDER_ITEM")
 public class Item {
 
@@ -29,8 +30,9 @@ public class Item {
   private Long itemId;
   private String name;
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Owning side
-  @JoinColumn(name = "fk_order_id")
+  @ManyToOne // Owning side
+  //@JoinColumn(name = "fk_order_id")
+  @JoinColumn(name = "order_id")
   private Order order;
 
   @JsonBackReference
