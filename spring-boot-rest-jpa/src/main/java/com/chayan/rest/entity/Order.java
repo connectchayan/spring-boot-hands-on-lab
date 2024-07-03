@@ -1,5 +1,6 @@
 package com.chayan.rest.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,16 +24,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "ORDER_DETAILS")
-public class Order {
+public class Order implements Serializable {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 964338575963795879L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "order_id")
   private Long orderId;
   private String description;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  @JoinColumn(name = "order_id")
+  @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Item> item;
 
   @OneToOne(mappedBy = "order",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -49,7 +53,5 @@ public class Order {
   public Delivery getDelivery() {
     return delivery;
   }
-
-
 
 }

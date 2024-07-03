@@ -1,7 +1,7 @@
 package com.chayan.rest.entity;
 
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,8 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
@@ -22,16 +22,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Table(name = "ORDER_ITEM")
-public class Item {
+public class Item  implements Serializable{
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -875237582514681796L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "item_id")
   private Long itemId;
   private String name;
 
-  @ManyToOne // Owning side
-  //@JoinColumn(name = "fk_order_id")
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "order_id")
   private Order order;
 

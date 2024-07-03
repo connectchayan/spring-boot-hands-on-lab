@@ -43,7 +43,7 @@ public class OrderController {
 
   @PatchMapping(value = "/orders/{id}", headers = "content-type=application/json",
       consumes = "application/json", produces = "application/json")
-  public ResponseEntity<Order> updatePartialOrder(@RequestBody Map<String, Object> order,
+  public ResponseEntity<Order> updatePartialOrder(@RequestBody Order order,
       @PathVariable Long id) {
 
     return Optional.ofNullable(orderService.updatePartialOrder(order, id)).map(ResponseEntity::ok)

@@ -1,5 +1,6 @@
 package com.chayan.rest.entity;
 
+import java.io.Serializable;
 import com.chayan.rest.enums.DeliveryMethod;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
@@ -24,14 +25,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "ORDER_DELIVERY")
-public class Delivery {
+public class Delivery implements Serializable {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 6906103631880707810L;
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "delivery_id")
   private Long deliveryID;
   
   @OneToOne
-  //@JoinColumn(name = "fk_order_id")
   @JoinColumn(name = "order_id")
   private Order order;
   
