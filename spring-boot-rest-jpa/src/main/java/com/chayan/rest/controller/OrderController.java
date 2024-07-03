@@ -1,9 +1,9 @@
 package com.chayan.rest.controller;
 
-import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,23 +43,30 @@ public class OrderController {
 
   @PatchMapping(value = "/orders/{id}", headers = "content-type=application/json",
       consumes = "application/json", produces = "application/json")
-  public ResponseEntity<Order> updatePartialOrder(@RequestBody Order order,
-      @PathVariable Long id) {
+  public ResponseEntity<Order> updatePartialOrder(@RequestBody Order order, @PathVariable Long id) {
 
     return Optional.ofNullable(orderService.updatePartialOrder(order, id)).map(ResponseEntity::ok)
         .orElse(ResponseEntity.badRequest().build());
 
   }
-  
+
   @PutMapping(value = "/orders/{id}", headers = "content-type=application/json",
       consumes = "application/json", produces = "application/json")
-  public ResponseEntity<Order> updateOrder(@RequestBody Order order,
-      @PathVariable Long id) {
+  public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable Long id) {
 
     return Optional.ofNullable(orderService.updateOrder(order, id)).map(ResponseEntity::ok)
         .orElse(ResponseEntity.badRequest().build());
 
   }
 
+  @DeleteMapping(value = "/orders/{id}", headers = "content-type=application/json",
+      consumes = "application/json", produces = "application/json")
+
+  public ResponseEntity<Long> deleteOrder(@PathVariable Long id) {
+
+    return Optional.ofNullable(orderService.deleteOrder(id)).map(ResponseEntity::ok)
+        .orElse(ResponseEntity.badRequest().build());
+
+  }
 
 }

@@ -37,9 +37,7 @@ public class OrderService {
   }
 
   public Order updatePartialOrder(Order order, Long id) {
-
     return orderRepository.findById(id).map(ordr -> {
-
       if (StringUtils.isNotBlank(order.getDescription()))
         ordr.setDescription(order.getDescription());
 
@@ -48,52 +46,16 @@ public class OrderService {
       }
 
       if (Objects.nonNull(order.getItem())) {
-
         List<Item> tempList = new ArrayList<>();
-
         order.getItem().forEach(itm -> {
           if (StringUtils.isNotBlank(itm.getName()))
             tempList.add(itm);
         });
-
         ordr.getItem().addAll(tempList);
-
       }
-
       return orderRepository.save(ordr);
     }).orElseThrow(() -> new ResourceNotFoundException("Order not found with id " + id));
-
-
   }
-    /*
-     * Optional<Order> existingOrder = orderRepository.findById(id);
-     * 
-     * if (existingOrder .isPresent()) {
-     * 
-     * ordr = existingOrder.get();
-     * 
-     * if (StringUtils.isNotBlank(order.getDescription()))
-     * ordr.setDescription(order.getDescription());
-     * 
-     * if (Objects.nonNull(order.getItem())) {
-     * 
-     * order.getItem().forEach(itm -> { if (StringUtils.isNotBlank(itm.getName())) {
-     * existingItems.add(itm); } }); existingOrder.get().getItem().addAll(existingItems); }
-     * 
-     * if (Objects.nonNull(order.getDelivery())) { Delivery existingDelivery =
-     * populateDelivery(order, existingOrder); ordr.setDelivery(existingDelivery); }
-     * 
-     * 
-     * propertiesMap.forEach((k, v) -> { Field field = ReflectionUtils.findField(Order.class, k);
-     * field.setAccessible(true); ReflectionUtils.setField(field, existingOrder.get(), v);
-     * 
-     * });
-     * 
-     * return orderRepository.save(existingOrder.get());
-     * 
-     * } else { throw new ResourceNotFoundException("Updation failed for order_id: " + id); }
-     * 
-     */
 
   private void populateDelivery(Order order, Order ordr) {
     if (StringUtils.isNotBlank(order.getDelivery().getDeliveryAddress()))
@@ -101,8 +63,7 @@ public class OrderService {
     if (Objects.nonNull(order.getDelivery().getDeliveryMethod()))
       ordr.getDelivery().setDeliveryMethod(order.getDelivery().getDeliveryMethod());
     if (StringUtils.isNotBlank(order.getDelivery().getEstimatedDeliveryDate()))
-      ordr.getDelivery()
-          .setEstimatedDeliveryDate(order.getDelivery().getEstimatedDeliveryDate());
+      ordr.getDelivery().setEstimatedDeliveryDate(order.getDelivery().getEstimatedDeliveryDate());
   }
 
   public Order updateOrder(Order order, Long id) {
@@ -122,21 +83,21 @@ public class OrderService {
     }
   }
 
-  /*
-   * Optional<Order> existingOrder = orderRepository.findById(id); Order ordr = null; if
-   * (existingOrder.isPresent()) { ordr = existingOrder.get(); if
-   * (StringUtils.isNotBlank(order.getDescription())) ordr.setDescription(order.getDescription());
-   * if (Objects.nonNull(order.getItem())) {
-   * 
-   * List<Item> existingItems = new ArrayList<>(); order.getItem().forEach(itm -> { if
-   * (StringUtils.isNotBlank(itm.getName())) { existingItems.add(itm); } });
-   * existingOrder.get().getItem().addAll(existingItems); }
-   * 
-   * if (Objects.nonNull(order.getDelivery())) { Delivery existingDelivery = populateDelivery(order,
-   * existingOrder); ordr.setDelivery(existingDelivery); } return orderRepository.save(ordr); } else
-   * { throw new ResourceNotFoundException("Updation failed for order_id: " + id); }
-   * 
-   * }
-   */
+  public Long deleteOrder(Long id) {
+
+    Optional<Order> existingOrder = orderRepository.findById(id);
+
+    if (existingOrder.isPresent()) {
+
+      orderRepository.deleteById(id);
+
+      return id;
+    } else {
+
+      throw new ResourceNotFoundException("Unable to delete with id " + id);
+    }
+
+  }
+
 
 }
